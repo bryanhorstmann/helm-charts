@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "home-helm-charts.fullname" . }}
+  labels: {{- include "home-helm-charts.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: {{- include "home-helm-charts.selectorLabels" . | nindent 6 }}
+  strategy: {{ toYaml .Values.rolloutStrategy | nindent 4}}
+  template:
+    metadata:
+      labels:  {{- include "home-helm-charts.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ include "home-helm-charts.fullname" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
+        {{- with .Values.env }}
+        env:
+        {{- range $k, $v := . }}
+        - name: "{{ $k }}"
+          value: "{{ $v }}"
+        {{- end }}
+        {{- end }}
+        {{- with .Values.resources }}
+        resources: {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.volumeMounts }}
+        volumeMounts: {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.volumes }}
+      volumes: {{- toYaml . | nindent 6 }}
+      {{- end }}

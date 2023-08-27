@@ -1,0 +1,15 @@
+{{- if (.Values.service).enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "home-helm-charts.fullname" . }}
+  labels: {{- include "home-helm-charts.labels" . | nindent 4 }}
+spec:
+  type: {{ (.Values.service).type }}
+  ports:
+    - port: {{ (.Values.service).port }}
+      targetPort: {{ default (.Values.service).port (.Values.service).targetPort }}
+      protocol: TCP
+      name: http
+  selector: {{- include "home-helm-charts.selectorLabels" . | nindent 4 }}
+{{- end }}
