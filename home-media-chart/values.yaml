@@ -24,6 +24,8 @@ volumeMounts: []
 # - name: config
 #   mountPath: /config
 
+hostNetwork: false
+
 service:
   enabled: true
   type: ClusterIP

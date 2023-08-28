@@ -33,6 +33,7 @@ spec:
         {{- with .Values.volumeMounts }}
         volumeMounts: {{- toYaml . | nindent 8 }}
         {{- end }}
+      hostNetwork: {{ default false .Values.hostNetwork }}
       {{- with .Values.volumes }}
       volumes: {{- toYaml . | nindent 6 }}
       {{- end }}
