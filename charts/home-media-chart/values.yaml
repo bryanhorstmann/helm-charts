@@ -14,6 +14,27 @@ env: {}
   # UMASK: "022"
   # TZ: Africa/Johannesburg
 
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- Define a Kubernetes Liveness Probe
+livenessProbe: {}
+
+# -- Define a Kubernetes Readiness Probe
+readinessProbe: {}
+
+# -- Define a Kubernetes Startup Probe
+startupProbe: {}
+
 volumes: []
 # - name: config
 #   hostPath:
@@ -46,15 +67,3 @@ ingress:
   # - secretName: chart-example-tls
   #   hosts:
   #     - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
