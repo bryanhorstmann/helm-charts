@@ -48,9 +48,19 @@ volumeMounts: []
 hostNetwork: false
 
 service:
+  # -- Create a service object
   enabled: true
+
+  # -- Determines how the Service is exposed
   type: ClusterIP
+
+  # -- The list of ports that are exposed by this service. Overwrites `service.port` and `service.targetPort`
+  ports: []
+
+  # -- The port that will be exposed by this service. Has no effect if `service.ports` is configured
   port: 80
+
+  # -- Port to access on the pods targeted by the service. Has no effect if `service.ports` is configured
   targetPort: ""
 
 ingress:

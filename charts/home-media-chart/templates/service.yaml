@@ -7,9 +7,13 @@ metadata:
 spec:
   type: {{ (.Values.service).type }}
   ports:
+    {{- if (.Values.service).ports }}
+    {{- toYaml (.Values.service).ports | nindent 4 }}
+    {{- else }}
     - port: {{ (.Values.service).port }}
       targetPort: {{ default (.Values.service).port (.Values.service).targetPort }}
       protocol: TCP
       name: http
+    {{- end }}
   selector: {{- include "home-helm-charts.selectorLabels" . | nindent 4 }}
 {{- end }}
