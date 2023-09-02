@@ -1,6 +1,6 @@
 # home-media-chart
 
-![Version: 0.3.2](https://img.shields.io/badge/Version-0.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -23,10 +23,11 @@ A Helm chart for Kubernetes
 | rolloutStrategy.rollingUpdate.maxSurge | string | `"50%"` |  |
 | rolloutStrategy.rollingUpdate.maxUnavailable | int | `0` |  |
 | rolloutStrategy.type | string | `"RollingUpdate"` |  |
-| service.enabled | bool | `true` |  |
-| service.port | int | `80` |  |
-| service.targetPort | string | `""` |  |
-| service.type | string | `"ClusterIP"` |  |
+| service.enabled | bool | `true` | Create a service object |
+| service.port | int | `80` | The port that will be exposed by this service. Has no effect if `service.ports` is configured |
+| service.ports | list | `[]` | The list of ports that are exposed by this service. Overwrites `service.port` and `service.targetPort` |
+| service.targetPort | string | `""` | Port to access on the pods targeted by the service. Has no effect if `service.ports` is configured |
+| service.type | string | `"ClusterIP"` | Determines how the Service is exposed |
 | startupProbe | object | `{}` | Define a Kubernetes Startup Probe |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
