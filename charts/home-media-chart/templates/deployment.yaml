@@ -7,12 +7,9 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels: {{- include "home-helm-charts.selectorLabels" . | nindent 6 }}
-  strategy:
-    {{- if eq (.Values.rolloutStrategy).type "Recreate" }}
-    type: Recreate
-    {{- else }}
-    {{- toYaml .Values.rolloutStrategy | nindent 4 }}
-    {{- end }}
+  {{- with .Values.rolloutStrategy }}
+  strategy: {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       labels:  {{- include "home-helm-charts.selectorLabels" . | nindent 8 }}

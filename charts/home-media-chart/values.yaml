@@ -1,19 +1,22 @@
+# -- A list of host rules used to configure the Ingress
 replicaCount: 1
 
 image:
+  # -- Repository to use for the deployment
   repository: nginx
+
+  # -- Image tag to use for the deployment
   tag: ""
 
-rolloutStrategy:
-  rollingUpdate:
-    maxSurge: 50%
-    maxUnavailable: 0
-  type: RollingUpdate
+# -- The deployment strategy to use to replace existing pods with new ones
+rolloutStrategy: {}
 
+# -- A map of environment variables to set in the container
 env: {}
   # UMASK: "022"
   # TZ: Africa/Johannesburg
 
+# -- Compute Resources required by this container
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -26,25 +29,28 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-# -- Define a Kubernetes Liveness Probe
+# -- Periodic probe of container liveness. Container will be restarted if the probe fails
 livenessProbe: {}
 
-# -- Define a Kubernetes Readiness Probe
+# -- Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails
 readinessProbe: {}
 
-# -- Define a Kubernetes Startup Probe
+# -- StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully
 startupProbe: {}
 
+# -- List of volumes that can be mounted by containers belonging to the pod
 volumes: []
 # - name: config
 #   hostPath:
 #     path: /data/kubernetes/radarr/config
 #     type: DirectoryOrCreate
 
+# -- Pod volumes to mount into the container's filesystem
 volumeMounts: []
 # - name: config
 #   mountPath: /config
 
+# -- Host networking requested for this pod. Use the host's network namespace
 hostNetwork: false
 
 service:
@@ -64,15 +70,22 @@ service:
   targetPort: ""
 
 ingress:
+  # -- Create an ingress object
   enabled: false
+
+  # -- Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
   annotations: {}
     # cert-manager.io/cluster-issuer: letsencrypt
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
+  # -- A list of host rules used to configure the Ingress
   hosts: []
   # - host: chart-example.local
   #   paths:
   #     - path: /
   #       pathType: ImplementationSpecific
+
+  # -- TLS configuration
   tls: []
   # - secretName: chart-example-tls
   #   hosts:
