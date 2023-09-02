@@ -28,16 +28,16 @@ spec:
         {{- end }}
         {{- end }}
         {{- with .Values.livenessProbe }}
-        livenessProbe: {{- toYaml . | nindent 8 }}
+        livenessProbe: {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .Values.readinessProbe }}
-        readinessProbe: {{- toYaml . | nindent 8 }}
+        readinessProbe: {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .Values.startupProbe }}
-        startupProbe: {{- toYaml . | nindent 8 }}
+        startupProbe: {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .Values.resources }}
-        resources: {{- toYaml . | nindent 8 }}
+        resources: {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .Values.volumeMounts }}
         volumeMounts: {{- toYaml . | nindent 8 }}
