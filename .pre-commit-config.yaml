@@ -26,6 +26,6 @@ repos:
           - "2"
         exclude: ^charts/
   - repo: https://github.com/norwoodj/helm-docs
-    rev: v1.11.0
+    rev: v1.11.1
     hooks:
       - id: helm-docs
