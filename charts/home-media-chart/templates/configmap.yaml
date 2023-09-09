@@ -1,0 +1,9 @@
+{{- range $cm := .Values.configMaps }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $cm.name }}
+  labels: {{- include "home-helm-charts.labels" $ | nindent 4 }}
+data: {{- toYaml $cm.data | nindent 2 }}
+{{- end }}
