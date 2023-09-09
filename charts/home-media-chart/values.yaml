@@ -90,3 +90,12 @@ ingress:
   # - secretName: chart-example-tls
   #   hosts:
   #     - chart-example.local
+
+# -- A list of configMaps objects to create. See values.yaml for an example of the object
+configMaps: []
+  # - name: foo
+  #   data:
+  #     nginx.conf: |
+  #       user  nginx;
+  #       worker_processes  1;
+  #       etc...

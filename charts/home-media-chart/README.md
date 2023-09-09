@@ -1,6 +1,6 @@
 # home-media-chart
 
-![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -8,6 +8,7 @@ A Helm chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| configMaps | list | `[]` | A list of configMaps objects to create. See values.yaml for an example of the object |
 | env | object | `{}` | A map of environment variables to set in the container |
 | hostNetwork | bool | `false` | Host networking requested for this pod. Use the host's network namespace |
 | image.repository | string | `"nginx"` | Repository to use for the deployment |
