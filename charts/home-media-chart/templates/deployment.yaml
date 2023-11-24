@@ -12,6 +12,8 @@ spec:
   {{- end }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:  {{- include "home-helm-charts.selectorLabels" . | nindent 8 }}
     spec:
       containers:
