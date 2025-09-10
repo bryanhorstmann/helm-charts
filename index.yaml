@@ -2,6 +2,15 @@ apiVersion: v1
 entries:
   home-media-chart:
   - apiVersion: v2
+    created: "2025-09-10T10:04:12.605916196Z"
+    description: A Helm chart for Kubernetes
+    digest: c6246e1f1a9df5a0180345cfc3d9c8346aaf1187966880042f3336c0dba84166
+    name: home-media-chart
+    type: application
+    urls:
+    - https://github.com/bryanhorstmann/helm-charts/releases/download/home-media-chart-0.8.0/home-media-chart-0.8.0.tgz
+    version: 0.8.0
+  - apiVersion: v2
     created: "2023-11-24T07:22:19.751864336Z"
     description: A Helm chart for Kubernetes
     digest: a213be7102c9a847ba300d89dae792f1a8db59a63e266960317e824aba7f131f
@@ -82,4 +91,4 @@ entries:
     urls:
     - https://github.com/bryanhorstmann/helm-charts/releases/download/home-media-chart-0.2.0/home-media-chart-0.2.0.tgz
     version: 0.2.0
-generated: "2023-11-24T07:22:19.751904371Z"
+generated: "2025-09-10T10:04:12.605976019Z"
