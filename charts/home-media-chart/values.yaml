@@ -16,6 +16,11 @@ env: {}
   # UMASK: "022"
   # TZ: Africa/Johannesburg
 
+# -- A list of arguments to pass to the container command
+args: []
+  # - "--config"
+  # - "/app/config.yaml"
+
 # -- Compute Resources required by this container
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

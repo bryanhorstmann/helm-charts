@@ -19,6 +19,9 @@ spec:
       containers:
       - name: {{ include "home-helm-charts.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
+        {{- with .Values.args }}
+        args: {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with .Values.env }}
         env:
         {{- range $k, $v := . }}
