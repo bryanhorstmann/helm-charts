@@ -14,7 +14,7 @@ A Helm chart for Kubernetes
 | hostNetwork | bool | `false` | Host networking requested for this pod. Use the host's network namespace |
 | image.repository | string | `"nginx"` | Repository to use for the deployment |
 | image.tag | string | `""` | Image tag to use for the deployment |
-| imagePullSecrets | list | `[]` | Image pull secrets for pulling from private registries, e.g. [{name: ghcr-pull}] |
+| imagePullSecrets | list | `[]` | Image pull secrets for private registries, e.g. [{name: ghcr-pull}]. Attached to the created ServiceAccount (requires serviceAccount.create) |
 | ingress.annotations | object | `{}` | Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata |
 | ingress.enabled | bool | `false` | Create an ingress object |
 | ingress.hosts | list | `[]` | A list of host rules used to configure the Ingress |
