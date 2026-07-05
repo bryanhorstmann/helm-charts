@@ -29,7 +29,8 @@ A Helm chart for Kubernetes
 | service.ports | list | `[]` | The list of ports that are exposed by this service. Overwrites `service.port` and `service.targetPort` |
 | service.targetPort | string | `""` | Port to access on the pods targeted by the service. Has no effect if `service.ports` is configured |
 | service.type | string | `"ClusterIP"` | Determines how the Service is exposed |
-| serviceAccountName | string | `""` | Name of an existing ServiceAccount to run the pod under (empty uses the namespace default) |
+| serviceAccount.create | bool | `true` | Create a ServiceAccount for the release (carries imagePullSecrets) |
+| serviceAccount.name | string | `""` | ServiceAccount name; defaults to the release name when empty |
 | startupProbe | object | `{}` | StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully |
 | volumeMounts | list | `[]` | Pod volumes to mount into the container's filesystem |
 | volumes | list | `[]` | List of volumes that can be mounted by containers belonging to the pod |

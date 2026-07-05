@@ -19,9 +19,7 @@ spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets: {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.serviceAccountName }}
-      serviceAccountName: {{ . }}
-      {{- end }}
+      serviceAccountName: {{ include "home-helm-charts.serviceAccountName" . }}
       containers:
       - name: {{ include "home-helm-charts.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"

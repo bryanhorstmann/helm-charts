@@ -11,8 +11,11 @@ image:
 # -- Image pull secrets for pulling from private registries, e.g. [{name: ghcr-pull}]
 imagePullSecrets: []
 
-# -- Name of an existing ServiceAccount to run the pod under (empty uses the namespace default)
-serviceAccountName: ""
+serviceAccount:
+  # -- Create a ServiceAccount for the release (carries imagePullSecrets)
+  create: true
+  # -- ServiceAccount name; defaults to the release name when empty
+  name: ""
 
 # -- The deployment strategy to use to replace existing pods with new ones
 rolloutStrategy: {}
