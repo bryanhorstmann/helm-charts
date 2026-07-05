@@ -1,6 +1,6 @@
 # home-media-chart
 
-![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -14,6 +14,7 @@ A Helm chart for Kubernetes
 | hostNetwork | bool | `false` | Host networking requested for this pod. Use the host's network namespace |
 | image.repository | string | `"nginx"` | Repository to use for the deployment |
 | image.tag | string | `""` | Image tag to use for the deployment |
+| imagePullSecrets | list | `[]` | Image pull secrets for pulling from private registries, e.g. [{name: ghcr-pull}] |
 | ingress.annotations | object | `{}` | Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata |
 | ingress.enabled | bool | `false` | Create an ingress object |
 | ingress.hosts | list | `[]` | A list of host rules used to configure the Ingress |
@@ -28,6 +29,7 @@ A Helm chart for Kubernetes
 | service.ports | list | `[]` | The list of ports that are exposed by this service. Overwrites `service.port` and `service.targetPort` |
 | service.targetPort | string | `""` | Port to access on the pods targeted by the service. Has no effect if `service.ports` is configured |
 | service.type | string | `"ClusterIP"` | Determines how the Service is exposed |
+| serviceAccountName | string | `""` | Name of an existing ServiceAccount to run the pod under (empty uses the namespace default) |
 | startupProbe | object | `{}` | StartupProbe indicates that the Pod has successfully initialized. If specified, no other probes are executed until this completes successfully |
 | volumeMounts | list | `[]` | Pod volumes to mount into the container's filesystem |
 | volumes | list | `[]` | List of volumes that can be mounted by containers belonging to the pod |

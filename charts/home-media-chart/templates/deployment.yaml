@@ -16,6 +16,12 @@ spec:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:  {{- include "home-helm-charts.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.serviceAccountName }}
+      serviceAccountName: {{ . }}
+      {{- end }}
       containers:
       - name: {{ include "home-helm-charts.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
