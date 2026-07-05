@@ -40,3 +40,15 @@ Selector labels
 app.kubernetes.io/name: {{ include "home-helm-charts.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+ServiceAccount name. Defaults to the release name (fullname) when created and no
+explicit name is set; falls back to "default" when creation is disabled.
+*/}}
+{{- define "home-helm-charts.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create }}
+{{- default (include "home-helm-charts.fullname" .) .Values.serviceAccount.name }}
+{{- else }}
+{{- default "default" .Values.serviceAccount.name }}
+{{- end }}
+{{- end }}

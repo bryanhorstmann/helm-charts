@@ -8,6 +8,15 @@ image:
   # -- Image tag to use for the deployment
   tag: ""
 
+# -- Image pull secrets for private registries, e.g. [{name: ghcr-pull}]. Attached to the created ServiceAccount (requires serviceAccount.create)
+imagePullSecrets: []
+
+serviceAccount:
+  # -- Create a ServiceAccount for the release (carries imagePullSecrets)
+  create: true
+  # -- ServiceAccount name; defaults to the release name when empty
+  name: ""
+
 # -- The deployment strategy to use to replace existing pods with new ones
 rolloutStrategy: {}
 
