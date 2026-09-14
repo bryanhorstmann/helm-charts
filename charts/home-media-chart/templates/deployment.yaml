@@ -17,9 +17,15 @@ spec:
       labels:  {{- include "home-helm-charts.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ include "home-helm-charts.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext: {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - name: {{ include "home-helm-charts.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
+        {{- with .Values.securityContext }}
+        securityContext: {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with .Values.args }}
         args: {{- toYaml . | nindent 10 }}
         {{- end }}

@@ -1,6 +1,6 @@
 # home-media-chart
 
-![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.10.0](https://img.shields.io/badge/Version-0.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -20,10 +20,12 @@ A Helm chart for Kubernetes
 | ingress.hosts | list | `[]` | A list of host rules used to configure the Ingress |
 | ingress.tls | list | `[]` | TLS configuration |
 | livenessProbe | object | `{}` | Periodic probe of container liveness. Container will be restarted if the probe fails |
+| podSecurityContext | object | `{}` | Security context for the pod. Covers fsGroup, supplementalGroups, seccompProfile and pod-wide runAsUser |
 | readinessProbe | object | `{}` | Periodic probe of container service readiness. Container will be removed from service endpoints if the probe fails |
 | replicaCount | int | `1` | A list of host rules used to configure the Ingress |
 | resources | object | `{}` | Compute Resources required by this container |
 | rolloutStrategy | object | `{}` | The deployment strategy to use to replace existing pods with new ones |
+| securityContext | object | `{}` | Security context for the container. Covers capabilities, readOnlyRootFilesystem, allowPrivilegeEscalation and per-container runAsUser |
 | service.enabled | bool | `true` | Create a service object |
 | service.port | int | `80` | The port that will be exposed by this service. Has no effect if `service.ports` is configured |
 | service.ports | list | `[]` | The list of ports that are exposed by this service. Overwrites `service.port` and `service.targetPort` |
