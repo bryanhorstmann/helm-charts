@@ -67,6 +67,14 @@ volumeMounts: []
 # -- Host networking requested for this pod. Use the host's network namespace
 hostNetwork: false
 
+# -- Security context for the pod. Covers fsGroup, supplementalGroups, seccompProfile and pod-wide runAsUser
+podSecurityContext: {}
+
+# -- Security context for the container. Covers capabilities, readOnlyRootFilesystem, allowPrivilegeEscalation and per-container runAsUser
+securityContext: {}
+  # capabilities:
+  #   add: [NET_ADMIN, NET_RAW]
+
 service:
   # -- Create a service object
   enabled: true
