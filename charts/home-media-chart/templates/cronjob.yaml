@@ -1,0 +1,67 @@
+{{- range $name, $job := .Values.cronJobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $name }}
+  labels:
+    helm.sh/chart: {{ include "home-helm-charts.chart" $ }}
+    app.kubernetes.io/name: {{ $name }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+spec:
+  schedule: {{ $job.schedule | quote }}
+  {{- with $job.concurrencyPolicy }}
+  concurrencyPolicy: {{ . }}
+  {{- end }}
+  {{- if hasKey $job "successfulJobsHistoryLimit" }}
+  successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
+  {{- end }}
+  {{- if hasKey $job "failedJobsHistoryLimit" }}
+  failedJobsHistoryLimit: {{ $job.failedJobsHistoryLimit }}
+  {{- end }}
+  jobTemplate:
+    spec:
+      {{- if hasKey $job "backoffLimit" }}
+      backoffLimit: {{ $job.backoffLimit }}
+      {{- end }}
+      template:
+        metadata:
+          labels:
+            helm.sh/chart: {{ include "home-helm-charts.chart" $ }}
+            app.kubernetes.io/name: {{ $name }}
+            app.kubernetes.io/instance: {{ $.Release.Name }}
+            app.kubernetes.io/managed-by: {{ $.Release.Service }}
+        spec:
+          serviceAccountName: {{ include "home-helm-charts.serviceAccountName" $ }}
+          restartPolicy: {{ default "OnFailure" $job.restartPolicy }}
+          {{- with $.Values.podSecurityContext }}
+          securityContext: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          containers:
+          - name: {{ $name }}
+            image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default "latest" }}"
+            {{- with $.Values.securityContext }}
+            securityContext: {{- toYaml . | nindent 14 }}
+            {{- end }}
+            {{- with $job.command }}
+            command: {{- toYaml . | nindent 14 }}
+            {{- end }}
+            {{- with $job.args }}
+            args: {{- toYaml . | nindent 14 }}
+            {{- end }}
+            {{- with $.Values.env }}
+            env:
+            {{- range $k, $v := . }}
+            - name: "{{ $k }}"
+              value: "{{ $v }}"
+            {{- end }}
+            {{- end }}
+            {{- with $.Values.volumeMounts }}
+            volumeMounts: {{- toYaml . | nindent 12 }}
+            {{- end }}
+          hostNetwork: {{ default false $.Values.hostNetwork }}
+          {{- with $.Values.volumes }}
+          volumes: {{- toYaml . | nindent 10 }}
+          {{- end }}
+{{- end }}
