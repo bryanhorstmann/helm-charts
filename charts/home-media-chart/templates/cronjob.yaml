@@ -1,4 +1,5 @@
-{{- range $name, $job := .Values.cronJobs }}
+{{- range $suffix, $job := .Values.cronJobs }}
+{{- $name := printf "%s-%s" (include "home-helm-charts.fullname" $) $suffix | trunc 63 | trimSuffix "-" }}
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -8,6 +9,7 @@ metadata:
     helm.sh/chart: {{ include "home-helm-charts.chart" $ }}
     app.kubernetes.io/name: {{ $name }}
     app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/component: {{ $suffix }}
     app.kubernetes.io/managed-by: {{ $.Release.Service }}
 spec:
   schedule: {{ $job.schedule | quote }}
@@ -31,6 +33,7 @@ spec:
             helm.sh/chart: {{ include "home-helm-charts.chart" $ }}
             app.kubernetes.io/name: {{ $name }}
             app.kubernetes.io/instance: {{ $.Release.Name }}
+            app.kubernetes.io/component: {{ $suffix }}
             app.kubernetes.io/managed-by: {{ $.Release.Service }}
         spec:
           serviceAccountName: {{ include "home-helm-charts.serviceAccountName" $ }}

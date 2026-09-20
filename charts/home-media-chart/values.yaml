@@ -122,9 +122,9 @@ configMaps: []
   #       worker_processes  1;
   #       etc...
 
-# -- A map of CronJob objects to create, keyed by resource name. See values.yaml for an example of the object
+# -- A map of CronJob objects to create, keyed by a suffix appended to the release name. See values.yaml for an example of the object
 cronJobs: {}
-  # my-cronjob:
+  # sync:
   #   schedule: "0 3 * * *"
   #   command: ["/bin/sh", "-c", "echo hello"]
   #   args: []

@@ -10,7 +10,7 @@ A Helm chart for Kubernetes
 |-----|------|---------|-------------|
 | args | list | `[]` | A list of arguments to pass to the container command |
 | configMaps | list | `[]` | A list of configMaps objects to create. See values.yaml for an example of the object |
-| cronJobs | object | `{}` | A map of CronJob objects to create, keyed by resource name. See values.yaml for an example of the object |
+| cronJobs | object | `{}` | A map of CronJob objects to create, keyed by a suffix appended to the release name. See values.yaml for an example of the object |
 | env | object | `{}` | A map of environment variables to set in the container |
 | hostNetwork | bool | `false` | Host networking requested for this pod. Use the host's network namespace |
 | image.repository | string | `"nginx"` | Repository to use for the deployment |
